@@ -36,6 +36,7 @@ Note: To precompute all required rotation indexes, use `init_rotation!`.
 See also: [`SecureArray`](@ref), [`init_rotation!`](@ref)
 """
 function Base.circshift(sa::SecureArray, shifts)
+    println("[Circshift debug 1]: Got rotation index $(shifts) for array $(size(sa))")
     if length(shifts) > ndims(sa)
         throw(ArgumentError("Got rotation index with length $(length(shifts)), expected $(ndims(sa))"))
     elseif length(shifts) < ndims(sa)
@@ -46,5 +47,6 @@ function Base.circshift(sa::SecureArray, shifts)
         return sa
     end
 
+    println("[Circshift debug 2]: Got rotation index $(shifts) for array $(size(sa))")
     rotate(sa, shifts)
 end

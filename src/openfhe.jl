@@ -82,6 +82,9 @@ function init_rotation!(context::SecureContext{<:OpenFHEBackend}, private_key::P
     cc = get_crypto_context(context)
     # Get rotation indices for precompilation
     rotation_indices = compute_rotation_indices_nd(context, shape, shifts)
+
+    println("[init_rotation! debug]: Idx $(rotation_indices), shifts $(shifts), shape $(shape)")
+
     # All rotation indices correspond to Base.circshift, but to use with OpenFHE,
     # all rotation indices have to be negated.
     OpenFHE.EvalRotateKeyGen(cc, private_key.private_key, -unique(rotation_indices))
